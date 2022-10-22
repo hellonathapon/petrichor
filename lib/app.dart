@@ -42,6 +42,7 @@ class WeatherAppView extends StatelessWidget {
             ),
           ),
           home: const WeatherScreen(),
+          debugShowCheckedModeBanner: false,
         );
       },
     );
