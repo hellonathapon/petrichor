@@ -68,7 +68,7 @@ class Weather extends Equatable {
 
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 
-  // to update specific values of the instance
+  // For updating specific values of the instance
   Weather copyWith({
     WeatherCondition? condition,
     DateTime? lastUpdated,
