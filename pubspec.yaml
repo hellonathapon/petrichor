@@ -14,7 +14,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   flutter_dotenv: ^5.0.2
   google_fonts: ^3.0.1
-  hydrated_bloc: ^8.1.0
+  hydrated_bloc: ^9.0.0-dev.3
   json_annotation: ^4.7.0
   path_provider: ^2.0.11
   photo_repository:

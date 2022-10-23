@@ -1,7 +1,7 @@
+import 'package:petrichor/photo/photo.dart';
 import 'package:flutter/material.dart';
 import 'package:petrichor/weather/weather.dart';
-import 'package:weather_repository/weather_repository.dart'
-    show WeatherCondition;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeatherPopulated extends StatelessWidget {
   const WeatherPopulated({
@@ -18,19 +18,25 @@ class WeatherPopulated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Stack(
-      children: [
-        _WeatherBackground(),
-        RefreshIndicator(
+    return BlocConsumer<PhotoCubit, PhotoState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return RefreshIndicator(
           onRefresh: onRefresh,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            clipBehavior: Clip.none,
-            child: Center(
+          // displacement: 20.0,
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              // clipBehavior: Clip.none,
               child: Column(
                 children: [
-                  const SizedBox(height: 48),
-                  _WeatherIcon(condition: weather.condition),
+                  const SizedBox(height: 200),
+                  // big BG icons
+                  // _WeatherIcon(condition: weather.condition),
                   Text(
                     weather.location,
                     style: theme.textTheme.headline2?.copyWith(
@@ -44,14 +50,20 @@ class WeatherPopulated extends StatelessWidget {
                     ),
                   ),
                   Text(
+                    weather.condition.name,
+                    style: theme.textTheme.headline3?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
                     '''Last Updated at ${TimeOfDay.fromDateTime(weather.lastUpdated).format(context)}''',
                   ),
                 ],
               ),
             ),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

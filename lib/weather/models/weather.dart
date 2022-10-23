@@ -13,6 +13,10 @@ extension TemperatureUnitsX on TemperatureUnits {
   bool get isCelsius => this == TemperatureUnits.celsius;
 }
 
+extension WeatherConditionX on WeatherCondition {
+  bool get isUnknown => this == WeatherCondition.unknown;
+}
+
 // Since a Temperature value can be wether Celsius or Fahrenheit
 // and it can be toggled back and forth consistently, we need to seperate Temperature out from Weather
 @JsonSerializable()

@@ -1,23 +1,21 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:petrichor/app.dart';
 import 'package:petrichor/weather_bloc_observer.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:photo_repository/photo_repository.dart';
 import 'package:weather_repository/weather_repository.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:petrichor/app_hydrated_storage.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+
+  HydratedBloc.storage = MyHydratedStorage();
   Bloc.observer = WeatherBlocObserver();
-  final storage = await HydratedStorage.build(
-    storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getTemporaryDirectory(),
-  );
-  HydratedBlocOverrides.runZoned(
-    () => runApp(WeatherApp(weatherRepository: WeatherRepository())),
-    storage: storage,
-  );
+
+  runApp(App(
+    weatherRepository: WeatherRepository(),
+    photoRepository: PhotoRepository(),
+  ));
 }
