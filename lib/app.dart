@@ -48,17 +48,16 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    // final textTheme = Theme.of(context).textTheme;
     return MaterialApp(
       theme: ThemeData(
-        // primaryColor: color,
         textTheme: GoogleFonts.rajdhaniTextTheme(),
-        appBarTheme: AppBarTheme(
-          titleTextStyle: GoogleFonts.rajdhaniTextTheme(textTheme)
-              .apply(bodyColor: Colors.white)
-              .headline6,
-        ),
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        /* dark theme settings */
+      ),
+      themeMode: ThemeMode.dark,
       home: const WeatherScreen(),
       debugShowCheckedModeBanner: false,
     );

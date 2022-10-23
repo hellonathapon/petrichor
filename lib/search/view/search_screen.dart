@@ -25,27 +25,50 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('City Search')),
-      body: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: TextField(
-                controller: _textController,
-                decoration: const InputDecoration(
-                  labelText: 'City',
-                  hintText: 'Chicago',
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text('City Search'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: TextField(
+              controller: _textController,
+              decoration: InputDecoration(
+                labelText: 'Input your City',
+                hintText: 'Luang Prabang',
+                prefixIcon: const Icon(
+                  Icons.sunny_snowing,
+                  // color: Colors.white,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
             ),
           ),
-          IconButton(
-            key: const Key('searchPage_search_iconButton'),
-            icon: const Icon(Icons.search, semanticLabel: 'Submit'),
-            onPressed: () => Navigator.of(context).pop(_text),
-          )
-        ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.of(context).pop(_text);
+        },
+        label: const Text(
+          'Search',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        // icon: const Icon(
+        //   Icons.sunny_snowing,
+        //   color: Colors.white,
+        // ),
+        backgroundColor: Colors.blue,
       ),
     );
   }

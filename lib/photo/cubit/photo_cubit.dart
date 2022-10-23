@@ -11,7 +11,7 @@ part 'photo_state.dart';
 
 class PhotoCubit extends HydratedCubit<PhotoState> {
   PhotoCubit(this._photoRepository)
-      : super(PhotoState(fallbackPhoto: fallbackPhoto));
+      : super(const PhotoState(fallbackPhoto: fallbackPhoto));
 
   final PhotoRepository _photoRepository;
   static const fallbackPhoto = 'assets/cozy-raining.jpg';
