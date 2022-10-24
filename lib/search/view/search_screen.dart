@@ -16,6 +16,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   String get _text => _textController.text;
 
+  // important when using any kind of Controller, always dispose it to release memory allocation.
   @override
   void dispose() {
     _textController.dispose();
@@ -24,51 +25,51 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('City Search'),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
-            child: TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                labelText: 'Input your City',
-                hintText: 'Luang Prabang',
-                prefixIcon: const Icon(
-                  Icons.sunny_snowing,
-                  // color: Colors.white,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+    // Wrap GestureDetecture to hide soft input keyboard when clicking the screen
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('City Search'),
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: TextField(
+                controller: _textController,
+                decoration: InputDecoration(
+                  labelText: 'City name',
+                  hintText: 'Luang Prabang',
+                  prefixIcon: const Icon(
+                    Icons.sunny_snowing,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.of(context).pop(_text);
-        },
-        label: const Text(
-          'Search',
-          style: TextStyle(
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.of(context).pop(_text);
+          },
+          label: const Text(
+            'Search',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          icon: const Icon(
+            Icons.search,
             color: Colors.white,
           ),
+          backgroundColor: Colors.teal,
         ),
-        // icon: const Icon(
-        //   Icons.sunny_snowing,
-        //   color: Colors.white,
-        // ),
-        backgroundColor: Colors.blue,
       ),
     );
   }
